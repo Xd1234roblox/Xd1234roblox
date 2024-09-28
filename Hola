@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XPSoccer Simulación</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #field { width: 300px; height: 500px; border: 2px solid green; position: relative; margin: auto; }
+        #ball { width: 20px; height: 20px; background: black; border-radius: 50%; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+        #goal { width: 100px; height: 20px; background: red; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); }
+    </style>
+</head>
+<body>
+
+<h1>XPSoccer: Penalti</h1>
+<div id="field">
+    <div id="goal"></div>
+    <div id="ball"></div>
+</div>
+<button onclick="shoot()">Lanzar Penalti</button>
+<p id="result"></p>
+
+<script>
+    function shoot() {
+        const ball = document.getElementById('ball');
+        const result = document.getElementById('result');
+        
+        // Simula el movimiento de la pelota
+        ball.style.transition = 'bottom 1s ease';
+        ball.style.bottom = '400px'; // Altura del lanzamiento
+        
+        // Determina el resultado
+        setTimeout(() => {
+            const goalPosition = Math.random() * 300; // Aleatorio dentro del campo
+            const isGoal = goalPosition >= 100 && goalPosition <= 200; // Se considera gol si está en la portería
+
+            ball.style.transition = 'none';
+            ball.style.bottom = '0';
+            ball.style.left = `${goalPosition}px`;
+
+            result.textContent = isGoal ? '¡Gol!' : '¡Fallaste!';
+        }, 1000); // Tiempo para el lanzamiento
+    }
+</script>
+
+</body>
+</html>
